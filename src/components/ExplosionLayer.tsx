@@ -17,6 +17,9 @@ const PARTICLE_COUNT = 24;
 const EXPLOSION_LIFETIME = 2000;
 // Throttle drag spawns so dragging a finger sprays particles without flooding.
 const DRAG_INTERVAL = 90;
+// Hard cap on simultaneous explosions so rapid dragging can never balloon the
+// particle count (and frame budget). Oldest explosions are dropped first.
+const MAX_EXPLOSIONS = 12;
 
 type Explosion = {
   id: number;
@@ -46,7 +49,11 @@ export function ExplosionLayer({ explosionType }: Props) {
 
   const spawn = useCallback((x: number, y: number) => {
     const id = nextId.current++;
-    setExplosions((prev) => [...prev, { id, x, y, type: typeRef.current }]);
+    setExplosions((prev) => {
+      const next = [...prev, { id, x, y, type: typeRef.current }];
+      // Drop the oldest if we exceed the cap.
+      return next.length > MAX_EXPLOSIONS ? next.slice(next.length - MAX_EXPLOSIONS) : next;
+    });
 
     const timer = setTimeout(() => {
       setExplosions((prev) => prev.filter((e) => e.id !== id));
