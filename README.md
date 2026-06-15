@@ -19,6 +19,8 @@ Built with [Expo](https://expo.dev) (SDK 56) and React Native.
     - 🎉 **Confetti** – colorful paper pieces.
     - 😄 **Emojis** – random fun emojis fly around.
     - 🔤 **Letters** – random alphabet characters get thrown around.
+  - **Speed** – 🐢 **Slow**, 🚶 **Medium** or ⚡ **Fast** (the default).
+  - **Amount** – 🤏 **Few**, ✋ **Medium** (the default) or 💥 **Many** pieces.
 
 ## Why it stays smooth
 

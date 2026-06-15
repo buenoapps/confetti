@@ -2,27 +2,37 @@ import React, { useState } from 'react';
 import {
   Modal,
   Pressable,
+  ScrollView,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
 import {
+  AMOUNTS,
   BACKGROUNDS,
   EXPLOSIONS,
+  SPEEDS,
+  type AmountId,
   type BackgroundId,
   type ExplosionId,
+  type SpeedId,
 } from '../theme';
 
 /**
  * A floating settings button and a playful overlay that lets kids pick a
- * background and an explosion style with big, colorful, icon-first buttons.
+ * background, an explosion style, the animation speed and how much confetti,
+ * all with big, colorful, icon-first buttons.
  */
 
 type Props = {
   background: BackgroundId;
   explosion: ExplosionId;
+  speed: SpeedId;
+  amount: AmountId;
   onChangeBackground: (id: BackgroundId) => void;
   onChangeExplosion: (id: ExplosionId) => void;
+  onChangeSpeed: (id: SpeedId) => void;
+  onChangeAmount: (id: AmountId) => void;
 };
 
 type OptionButtonProps = {
@@ -51,8 +61,12 @@ function OptionButton({ icon, label, selected, onPress }: OptionButtonProps) {
 export function SettingsOverlay({
   background,
   explosion,
+  speed,
+  amount,
   onChangeBackground,
   onChangeExplosion,
+  onChangeSpeed,
+  onChangeAmount,
 }: Props) {
   const [open, setOpen] = useState(false);
 
@@ -75,41 +89,72 @@ export function SettingsOverlay({
         <Pressable style={styles.backdrop} onPress={() => setOpen(false)}>
           {/* Stop taps inside the card from closing the modal. */}
           <Pressable style={styles.card} onPress={() => {}}>
-            <Text style={styles.title}>Background</Text>
-            <View style={styles.row}>
-              {BACKGROUNDS.map((b) => (
-                <OptionButton
-                  key={b.id}
-                  icon={b.icon}
-                  label={b.label}
-                  selected={background === b.id}
-                  onPress={() => onChangeBackground(b.id)}
-                />
-              ))}
-            </View>
-
-            <Text style={styles.title}>Explosion</Text>
-            <View style={styles.row}>
-              {EXPLOSIONS.map((e) => (
-                <OptionButton
-                  key={e.id}
-                  icon={e.icon}
-                  label={e.label}
-                  selected={explosion === e.id}
-                  onPress={() => onChangeExplosion(e.id)}
-                />
-              ))}
-            </View>
-
-            <Pressable
-              style={({ pressed }) => [
-                styles.doneButton,
-                pressed && styles.optionPressed,
-              ]}
-              onPress={() => setOpen(false)}
+            <ScrollView
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={styles.cardContent}
             >
-              <Text style={styles.doneLabel}>Let's play! 🎉</Text>
-            </Pressable>
+              <Text style={styles.title}>Background</Text>
+              <View style={styles.row}>
+                {BACKGROUNDS.map((b) => (
+                  <OptionButton
+                    key={b.id}
+                    icon={b.icon}
+                    label={b.label}
+                    selected={background === b.id}
+                    onPress={() => onChangeBackground(b.id)}
+                  />
+                ))}
+              </View>
+
+              <Text style={styles.title}>Explosion</Text>
+              <View style={styles.row}>
+                {EXPLOSIONS.map((e) => (
+                  <OptionButton
+                    key={e.id}
+                    icon={e.icon}
+                    label={e.label}
+                    selected={explosion === e.id}
+                    onPress={() => onChangeExplosion(e.id)}
+                  />
+                ))}
+              </View>
+
+              <Text style={styles.title}>Speed</Text>
+              <View style={styles.row}>
+                {SPEEDS.map((s) => (
+                  <OptionButton
+                    key={s.id}
+                    icon={s.icon}
+                    label={s.label}
+                    selected={speed === s.id}
+                    onPress={() => onChangeSpeed(s.id)}
+                  />
+                ))}
+              </View>
+
+              <Text style={styles.title}>Amount</Text>
+              <View style={styles.row}>
+                {AMOUNTS.map((a) => (
+                  <OptionButton
+                    key={a.id}
+                    icon={a.icon}
+                    label={a.label}
+                    selected={amount === a.id}
+                    onPress={() => onChangeAmount(a.id)}
+                  />
+                ))}
+              </View>
+
+              <Pressable
+                style={({ pressed }) => [
+                  styles.doneButton,
+                  pressed && styles.optionPressed,
+                ]}
+                onPress={() => setOpen(false)}
+              >
+                <Text style={styles.doneLabel}>Let's play! 🎉</Text>
+              </Pressable>
+            </ScrollView>
           </Pressable>
         </Pressable>
       </Modal>
@@ -146,8 +191,11 @@ const styles = StyleSheet.create({
   card: {
     width: '100%',
     maxWidth: 420,
+    maxHeight: '85%',
     backgroundColor: '#ffffff',
     borderRadius: 28,
+  },
+  cardContent: {
     padding: 22,
   },
   title: {

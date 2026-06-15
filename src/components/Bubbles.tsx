@@ -44,9 +44,12 @@ function Bubble({
     };
   }, []);
 
+  // The bubble is anchored to the bottom of the screen, so a negative
+  // translateY moves it up. Travel from just below the bottom edge all the
+  // way to just above the top so bubbles use the full height of the screen.
   const translateY = rise.interpolate({
     inputRange: [0, 1],
-    outputRange: [height + size, -size],
+    outputRange: [size, -(height + size)],
   });
   // Gentle side-to-side sway as the bubble rises.
   const translateX = rise.interpolate({

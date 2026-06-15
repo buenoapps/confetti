@@ -8,6 +8,8 @@ import type { ColorValue } from 'react-native';
 
 export type BackgroundId = 'dark' | 'space' | 'underwater';
 export type ExplosionId = 'confetti' | 'emojis' | 'alphabet';
+export type SpeedId = 'slow' | 'medium' | 'fast';
+export type AmountId = 'few' | 'medium' | 'many';
 
 export type BackgroundOption = {
   id: BackgroundId;
@@ -22,6 +24,22 @@ export type ExplosionOption = {
   id: ExplosionId;
   label: string;
   icon: string;
+};
+
+export type SpeedOption = {
+  id: SpeedId;
+  label: string;
+  icon: string;
+  /** Multiplies a particle's animation duration. Fast = 1 (the baseline). */
+  durationMultiplier: number;
+};
+
+export type AmountOption = {
+  id: AmountId;
+  label: string;
+  icon: string;
+  /** Number of particles per explosion. */
+  count: number;
 };
 
 export const BACKGROUNDS: BackgroundOption[] = [
@@ -49,6 +67,20 @@ export const EXPLOSIONS: ExplosionOption[] = [
   { id: 'confetti', label: 'Confetti', icon: '🎉' },
   { id: 'emojis', label: 'Emojis', icon: '😄' },
   { id: 'alphabet', label: 'Letters', icon: '🔤' },
+];
+
+// Fast is the original speed (multiplier 1); the others slow the motion down.
+export const SPEEDS: SpeedOption[] = [
+  { id: 'slow', label: 'Slow', icon: '🐢', durationMultiplier: 2.4 },
+  { id: 'medium', label: 'Medium', icon: '🚶', durationMultiplier: 1.6 },
+  { id: 'fast', label: 'Fast', icon: '⚡', durationMultiplier: 1 },
+];
+
+// Medium is the original amount; few/many are the lighter/heavier variants.
+export const AMOUNTS: AmountOption[] = [
+  { id: 'few', label: 'Few', icon: '🤏', count: 12 },
+  { id: 'medium', label: 'Medium', icon: '✋', count: 24 },
+  { id: 'many', label: 'Many', icon: '💥', count: 44 },
 ];
 
 /** Bright, high-contrast colors that pop on every background. */

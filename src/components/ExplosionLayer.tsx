@@ -4,7 +4,7 @@ import {
   View,
   type GestureResponderEvent,
 } from 'react-native';
-import { Particle } from './Particle';
+import { Particle, PARTICLE_MAX_DURATION } from './Particle';
 import type { ExplosionId } from '../theme';
 
 /**
@@ -12,9 +12,6 @@ import type { ExplosionId } from '../theme';
  * of particles at the finger's position.
  */
 
-const PARTICLE_COUNT = 24;
-// A particle lives at most ~1.8s (see Particle.tsx); give a little headroom.
-const EXPLOSION_LIFETIME = 2000;
 // Throttle drag spawns so dragging a finger sprays particles without flooding.
 const DRAG_INTERVAL = 90;
 // Hard cap on simultaneous explosions so rapid dragging can never balloon the
@@ -26,22 +23,35 @@ type Explosion = {
   x: number;
   y: number;
   type: ExplosionId;
+  /** Particle count, captured at spawn so changing the setting won't disturb
+   * explosions that are already in flight. */
+  count: number;
+  /** Duration multiplier, also captured at spawn. */
+  speed: number;
 };
 
 type Props = {
   explosionType: ExplosionId;
+  /** Number of particles per explosion. */
+  amount: number;
+  /** Animation duration multiplier (1 = fast). */
+  speedMultiplier: number;
 };
 
-export function ExplosionLayer({ explosionType }: Props) {
+export function ExplosionLayer({ explosionType, amount, speedMultiplier }: Props) {
   const [explosions, setExplosions] = useState<Explosion[]>([]);
   const nextId = useRef(0);
   const lastDrag = useRef(0);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
-  // Keep the latest type in a ref so the responder callbacks (created once)
+  // Keep the latest settings in refs so the responder callbacks (created once)
   // always read the current selection.
   const typeRef = useRef(explosionType);
   typeRef.current = explosionType;
+  const amountRef = useRef(amount);
+  amountRef.current = amount;
+  const speedRef = useRef(speedMultiplier);
+  speedRef.current = speedMultiplier;
 
   useEffect(() => {
     return () => timers.current.forEach(clearTimeout);
@@ -49,15 +59,21 @@ export function ExplosionLayer({ explosionType }: Props) {
 
   const spawn = useCallback((x: number, y: number) => {
     const id = nextId.current++;
+    const speed = speedRef.current;
     setExplosions((prev) => {
-      const next = [...prev, { id, x, y, type: typeRef.current }];
+      const next = [
+        ...prev,
+        { id, x, y, type: typeRef.current, count: amountRef.current, speed },
+      ];
       // Drop the oldest if we exceed the cap.
       return next.length > MAX_EXPLOSIONS ? next.slice(next.length - MAX_EXPLOSIONS) : next;
     });
 
+    // Keep the explosion mounted until its slowest particle has finished.
+    const lifetime = PARTICLE_MAX_DURATION * speed + 250;
     const timer = setTimeout(() => {
       setExplosions((prev) => prev.filter((e) => e.id !== id));
-    }, EXPLOSION_LIFETIME);
+    }, lifetime);
     timers.current.push(timer);
   }, []);
 
@@ -94,8 +110,12 @@ export function ExplosionLayer({ explosionType }: Props) {
           pointerEvents="none"
           style={[styles.origin, { left: explosion.x, top: explosion.y }]}
         >
-          {Array.from({ length: PARTICLE_COUNT }).map((_, i) => (
-            <Particle key={i} type={explosion.type} />
+          {Array.from({ length: explosion.count }).map((_, i) => (
+            <Particle
+              key={i}
+              type={explosion.type}
+              speedMultiplier={explosion.speed}
+            />
           ))}
         </View>
       ))}
