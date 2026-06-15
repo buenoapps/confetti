@@ -272,7 +272,7 @@ const styles = StyleSheet.create({
   },
   page: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#05060f',
   },
   header: {
     paddingTop: 58,
@@ -308,7 +308,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     fontWeight: '900',
-    color: '#2b2350',
+    color: '#f0eefb',
     marginBottom: 12,
     marginTop: 6,
   },
@@ -325,13 +325,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 16,
     borderRadius: 20,
-    backgroundColor: '#f0eefb',
+    backgroundColor: '#161b3a',
     borderWidth: 3,
     borderColor: 'transparent',
   },
   optionSelected: {
     borderColor: '#7B5BFF',
-    backgroundColor: '#ece7ff',
+    backgroundColor: '#2a2255',
   },
   optionPressed: {
     transform: [{ scale: 0.95 }],
@@ -343,7 +343,7 @@ const styles = StyleSheet.create({
   optionLabel: {
     fontSize: 15,
     fontWeight: '800',
-    color: '#2b2350',
+    color: '#f0eefb',
   },
   actions: {
     marginTop: 18,
