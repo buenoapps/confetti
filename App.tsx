@@ -16,7 +16,7 @@ import {
 export default function App() {
   const [background, setBackground] = useState<BackgroundId>('space');
   const [explosion, setExplosion] = useState<ExplosionId>('confetti');
-  const [speed, setSpeed] = useState<SpeedId>('fast');
+  const [speed, setSpeed] = useState<SpeedId>('medium');
   const [amount, setAmount] = useState<AmountId>('medium');
 
   const speedMultiplier =
