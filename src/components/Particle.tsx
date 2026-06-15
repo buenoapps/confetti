@@ -22,13 +22,19 @@ import {
 const BOX = 48;
 const GRAVITY = 900; // pixels, pulls particles back down for a natural fall
 
+// Longest a particle can animate at the baseline (fast) speed. Exported so the
+// explosion layer knows how long to keep an explosion mounted.
+export const PARTICLE_MAX_DURATION = 1800;
+
 type Props = {
   type: ExplosionId;
+  /** Multiplies the animation duration (1 = fast baseline, higher = slower). */
+  speedMultiplier: number;
   /** Called once the particle has finished animating. */
   onDone?: () => void;
 };
 
-function ParticleComponent({ type, onDone }: Props) {
+function ParticleComponent({ type, speedMultiplier, onDone }: Props) {
   const progress = useRef(new Animated.Value(0)).current;
 
   // Everything random is computed once and frozen for the particle's lifetime.
@@ -38,7 +44,7 @@ function ParticleComponent({ type, onDone }: Props) {
       const speed = 90 + Math.random() * 200;
       const vx = Math.cos(angle) * speed;
       const vy = Math.sin(angle) * speed;
-      const duration = 1100 + Math.random() * 700;
+      const duration = (1100 + Math.random() * 700) * speedMultiplier;
 
       // Sample the parabolic trajectory at a handful of points so the native
       // interpolation can reproduce the arc (out + gravity fall).
