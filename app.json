@@ -8,7 +8,11 @@
     "userInterfaceStyle": "dark",
     "ios": {
       "supportsTablet": true,
-      "buildNumber": "1"
+      "buildNumber": "1",
+      "bundleIdentifier": "com.buenoapps.confetti",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "versionCode": 1,
@@ -18,10 +22,17 @@
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
+      "package": "com.buenoapps.confetti",
       "predictiveBackGestureEnabled": false
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "owner": "buenoapps",
+    "extra": {
+      "eas": {
+        "projectId": "32689020-7dfe-4ae3-b8bb-3939c867dddb"
+      }
     }
   }
 }
