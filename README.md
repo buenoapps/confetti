@@ -19,8 +19,11 @@ Built with [Expo](https://expo.dev) (SDK 56) and React Native.
     - 🎉 **Confetti** – colorful paper pieces.
     - 😄 **Emojis** – random fun emojis fly around.
     - 🔤 **Letters** – random alphabet characters get thrown around.
-  - **Speed** – 🐢 **Slow**, 🚶 **Medium** or ⚡ **Fast** (the default).
+  - **Speed** – 🐢 **Slow**, 🚶 **Medium** (the default) or ⚡ **Fast**.
   - **Amount** – 🤏 **Few**, ✋ **Medium** (the default) or 💥 **Many** pieces.
+- The settings open as a **full-screen page** (not a dialog) and also include
+  **Share App** and **Rate this App** buttons plus the app version/build number
+  at the bottom.
 
 ## Why it stays smooth
 
@@ -53,7 +56,7 @@ src/components/
   Bubbles.tsx                   Rising bubbles (Ocean)
   ExplosionLayer.tsx            Touch surface; spawns/cleans up explosions
   Particle.tsx                  One flying piece (confetti / emoji / letter)
-  SettingsOverlay.tsx           The ⚙️ button and the kid-friendly settings card
+  SettingsOverlay.tsx           The ⚙️ button and the full-screen settings page
 ```
 
 ## Adding more themes or explosions
