@@ -15,10 +15,24 @@ Built with [Expo](https://expo.dev) (SDK 56) and React Native.
     - 🌙 **Night** – a calm dark gradient, nothing else.
     - 🚀 **Space** – dark sky with softly twinkling stars.
     - 🐠 **Ocean** – blue water with bubbles drifting up.
+    - ☀️ **Blue Sky** – a bright, clear blue sky.
+    - ☁️ **Clouds** – blue sky with white clouds drifting across.
+    - 🌴 **Jungle** – lush green gradient.
+    - ⛄ **Winter** – icy landscape with snow gently falling.
   - **Explosion**
     - 🎉 **Confetti** – colorful paper pieces.
     - 😄 **Emojis** – random fun emojis fly around.
     - 🔤 **Letters** – random alphabet characters get thrown around.
+    - ⭐ **Stars** – sparkling stars burst out.
+    - 🔥 **Fire** – flames fly everywhere.
+    - 🎆 **Firework** – fireworks and sparkles.
+    - 💧 **Water** – water drops and splashes.
+    - 💨 **Smoke** – puffs of smoke.
+    - 🌋 **Fire & Smoke** – flames and smoke mixed together.
+    - ⚡ **Lightning** – crackling lightning bolts.
+    - 🌈 **Rainbow** – stripes in every rainbow color.
+    - ❄️ **Snow** – fluttering snowflakes.
+    - 🍓 **Berries** – a burst of strawberries.
   - **Speed** – 🐢 **Slow**, 🚶 **Medium** (the default) or ⚡ **Fast**.
   - **Amount** – 🤏 **Few**, ✋ **Medium** (the default) or 💥 **Many** pieces.
 - The settings open as a **full-screen page** (not a dialog) and also include
@@ -54,6 +68,8 @@ src/components/
   Background.tsx                Gradient + the right decoration for each theme
   Stars.tsx                     Twinkling stars (Space)
   Bubbles.tsx                   Rising bubbles (Ocean)
+  Clouds.tsx                    Drifting clouds (Clouds)
+  Snow.tsx                      Falling snowflakes (Winter)
   ExplosionLayer.tsx            Touch surface; spawns/cleans up explosions
   Particle.tsx                  One flying piece (confetti / emoji / letter)
   SettingsOverlay.tsx           The ⚙️ button and the full-screen settings page

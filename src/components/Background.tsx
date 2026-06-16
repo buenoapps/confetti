@@ -4,10 +4,13 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { BACKGROUNDS, type BackgroundId } from '../theme';
 import { Stars } from './Stars';
 import { Bubbles } from './Bubbles';
+import { Clouds } from './Clouds';
+import { Snow } from './Snow';
 
 /**
  * Renders the selected background: a full-screen gradient plus optional
- * animated decorations (stars for space, bubbles for the ocean).
+ * animated decorations (stars for space, bubbles for the ocean, drifting
+ * clouds for the sky and falling snow for winter).
  */
 
 type Props = {
@@ -27,6 +30,8 @@ export function Background({ background }: Props) {
     >
       {background === 'space' && <Stars />}
       {background === 'underwater' && <Bubbles />}
+      {background === 'clouds' && <Clouds />}
+      {background === 'winter' && <Snow />}
     </LinearGradient>
   );
 }
