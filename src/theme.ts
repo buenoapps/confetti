@@ -6,8 +6,28 @@ import type { ColorValue } from 'react-native';
  * to add new themes or explosion styles later.
  */
 
-export type BackgroundId = 'dark' | 'space' | 'underwater';
-export type ExplosionId = 'confetti' | 'emojis' | 'alphabet';
+export type BackgroundId =
+  | 'dark'
+  | 'space'
+  | 'underwater'
+  | 'sky'
+  | 'clouds'
+  | 'jungle'
+  | 'winter';
+export type ExplosionId =
+  | 'confetti'
+  | 'emojis'
+  | 'alphabet'
+  | 'stars'
+  | 'fire'
+  | 'firework'
+  | 'water'
+  | 'smoke'
+  | 'smokefire'
+  | 'lightning'
+  | 'rainbow'
+  | 'snowflakes'
+  | 'strawberries';
 export type SpeedId = 'slow' | 'medium' | 'fast';
 export type AmountId = 'few' | 'medium' | 'many';
 
@@ -61,12 +81,46 @@ export const BACKGROUNDS: BackgroundOption[] = [
     icon: '🐠',
     gradient: ['#0a4f8a', '#0e7fb8', '#021a33'],
   },
+  {
+    id: 'sky',
+    label: 'Blue Sky',
+    icon: '☀️',
+    gradient: ['#2f9be0', '#7cc7f5', '#cdebff'],
+  },
+  {
+    id: 'clouds',
+    label: 'Clouds',
+    icon: '☁️',
+    gradient: ['#3aa3e6', '#86cdf6', '#e8f6ff'],
+  },
+  {
+    id: 'jungle',
+    label: 'Jungle',
+    icon: '🌴',
+    gradient: ['#3fae5a', '#1f7a33', '#0b3d18'],
+  },
+  {
+    id: 'winter',
+    label: 'Winter',
+    icon: '⛄',
+    gradient: ['#8ec9e6', '#c4e4f2', '#eef7fb'],
+  },
 ];
 
 export const EXPLOSIONS: ExplosionOption[] = [
   { id: 'confetti', label: 'Confetti', icon: '🎉' },
   { id: 'emojis', label: 'Emojis', icon: '😄' },
   { id: 'alphabet', label: 'Letters', icon: '🔤' },
+  { id: 'stars', label: 'Stars', icon: '⭐' },
+  { id: 'fire', label: 'Fire', icon: '🔥' },
+  { id: 'firework', label: 'Firework', icon: '🎆' },
+  { id: 'water', label: 'Water', icon: '💧' },
+  { id: 'smoke', label: 'Smoke', icon: '💨' },
+  { id: 'smokefire', label: 'Fire & Smoke', icon: '🌋' },
+  { id: 'lightning', label: 'Lightning', icon: '⚡' },
+  { id: 'rainbow', label: 'Rainbow', icon: '🌈' },
+  { id: 'snowflakes', label: 'Snow', icon: '❄️' },
+  { id: 'strawberries', label: 'Berries', icon: '🍓' },
 ];
 
 // Fast is the original speed (multiplier 1); the others slow the motion down.
@@ -111,6 +165,35 @@ export const EXPLOSION_EMOJIS = [
 ];
 
 export const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
+/**
+ * Emoji sets for the emoji-based explosions. Each tap picks randomly from the
+ * matching list. Explosions not listed here are drawn as shapes (see
+ * `Particle.tsx`): `confetti` uses CONFETTI_COLORS, `rainbow` uses
+ * RAINBOW_COLORS, and `alphabet`/`emojis` have their own special handling.
+ */
+export const EXPLOSION_GLYPHS: Partial<Record<ExplosionId, string[]>> = {
+  stars: ['⭐', '🌟', '✨', '💫'],
+  fire: ['🔥'],
+  firework: ['🎆', '🎇', '✨'],
+  water: ['💧', '💦'],
+  smoke: ['💨'],
+  smokefire: ['🔥', '💨', '🔥'],
+  lightning: ['⚡', '🌩️'],
+  snowflakes: ['❄️', '🌨️', '❄'],
+  strawberries: ['🍓'],
+};
+
+/** Rainbow stripe colors, in order, for the "Rainbow" explosion. */
+export const RAINBOW_COLORS = [
+  '#FF3B3B',
+  '#FF8A3D',
+  '#FFD23D',
+  '#3DFF88',
+  '#3DD2FF',
+  '#7B5BFF',
+  '#FF5BE7',
+];
 
 export function pick<T>(arr: readonly T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];

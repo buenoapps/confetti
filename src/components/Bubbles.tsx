@@ -11,7 +11,7 @@ import {
  * Each bubble loops from below the screen to above it on the native thread.
  */
 
-const BUBBLE_COUNT = 16;
+const BUBBLE_COUNT = 32;
 
 function Bubble({
   x,
