@@ -96,7 +96,7 @@ export const BACKGROUNDS: BackgroundOption[] = [
     id: 'jungle',
     label: 'Jungle',
     icon: '🌴',
-    gradient: ['#3fae5a', '#1f7a33', '#0b3d18'],
+    gradient: ['#0f3d1d', '#08260f', '#030d06'],
   },
   {
     id: 'winter',
