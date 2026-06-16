@@ -23,16 +23,17 @@ Built with [Expo](https://expo.dev) (SDK 56) and React Native.
     - 🎉 **Confetti** – colorful paper pieces.
     - 😄 **Emojis** – random fun emojis fly around.
     - 🔤 **Letters** – random alphabet characters get thrown around.
-    - ⭐ **Stars** – sparkling stars burst out.
-    - 🔥 **Fire** – flames fly everywhere.
-    - 🎆 **Firework** – fireworks and sparkles.
-    - 💧 **Water** – water drops and splashes.
-    - 💨 **Smoke** – puffs of smoke.
-    - 🌋 **Fire & Smoke** – flames and smoke mixed together.
-    - ⚡ **Lightning** – crackling lightning bolts.
-    - 🌈 **Rainbow** – stripes in every rainbow color.
-    - ❄️ **Snow** – fluttering snowflakes.
-    - 🍓 **Berries** – a burst of strawberries.
+    - ⭐ **Stars** – sparkling stars burst out (confetti-style).
+    - 🔥 **Fire** – flames fly everywhere (confetti-style).
+    - 🎆 **Firework** – glowing dots burst out in an even radial spray.
+    - 💧 **Water** – a single drop clings, then slides down like on a window.
+    - 💨 **Smoke** – puffs drift outward in every direction and fade (no fall).
+    - ⚡ **Lightning** – jagged bolts flicker from the finger to the bottom of
+      the screen, and vanish when you lift your finger.
+    - 🌈 **Rainbow** – a full-screen rainbow blooms from the touch point, clear
+      above and foggy below.
+    - ❄️ **Snow** – a few flakes pop out, then drift off the bottom super slowly.
+    - 🍓 **Berries** – a burst of strawberries (confetti-style).
   - **Speed** – 🐢 **Slow**, 🚶 **Medium** (the default) or ⚡ **Fast**.
   - **Amount** – 🤏 **Few**, ✋ **Medium** (the default) or 💥 **Many** pieces.
 - The settings open as a **full-screen page** (not a dialog) and also include
@@ -71,7 +72,13 @@ src/components/
   Clouds.tsx                    Drifting clouds (Clouds)
   Snow.tsx                      Falling snowflakes (Winter)
   ExplosionLayer.tsx            Touch surface; spawns/cleans up explosions
-  Particle.tsx                  One flying piece (confetti / emoji / letter)
+  Particle.tsx                  One flying piece (confetti / emoji / letter / star / fire / berry)
+  Firework.tsx                  One firework spark (radial dot burst)
+  WaterDrop.tsx                 A single droplet that slides down
+  Smoke.tsx                     A puff of smoke drifting outward
+  SnowParticle.tsx              A slowly falling snowflake (from a tap)
+  Lightning.tsx                 Flickering bolts while the finger is held
+  Rainbow.tsx                   Full-screen rainbow bloom centered on the touch
   SettingsOverlay.tsx           The ⚙️ button and the full-screen settings page
 ```
 
@@ -80,4 +87,7 @@ src/components/
 Everything kid-facing lives in `src/theme.ts`. Add an entry to `BACKGROUNDS` or
 `EXPLOSIONS` (with a label, an emoji icon and, for backgrounds, gradient
 colors), then handle the new id where it's rendered (`Background.tsx` for a new
-decoration, `Particle.tsx` for a new explosion look).
+decoration). For a new explosion, decide how distinct it is: a simple
+confetti-style emoji burst just needs an entry in `EXPLOSION_GLYPHS`, while a
+unique effect gets its own component (like `Firework.tsx` or `Rainbow.tsx`)
+wired into `ExplosionLayer.tsx`.

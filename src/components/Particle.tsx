@@ -5,7 +5,6 @@ import {
   CONFETTI_COLORS,
   EXPLOSION_EMOJIS,
   EXPLOSION_GLYPHS,
-  RAINBOW_COLORS,
   pick,
   type ExplosionId,
 } from '../theme';
@@ -56,10 +55,6 @@ function ParticleComponent({ type, speedMultiplier, onDone }: Props) {
 
       const spin = (Math.random() < 0.5 ? -1 : 1) * (180 + Math.random() * 720);
 
-      // Rainbow stripes are always elongated rectangles, colored from the
-      // rainbow palette; plain confetti is a mix of circles and rectangles.
-      const isRainbow = type === 'rainbow';
-
       // Pick the right glyph for emoji-based explosions.
       const glyphs = EXPLOSION_GLYPHS[type];
       const glyph =
@@ -75,8 +70,8 @@ function ParticleComponent({ type, speedMultiplier, onDone }: Props) {
         ys,
         duration,
         spin,
-        color: pick(isRainbow ? RAINBOW_COLORS : CONFETTI_COLORS),
-        isCircle: isRainbow ? false : Math.random() < 0.35,
+        color: pick(CONFETTI_COLORS),
+        isCircle: Math.random() < 0.35,
         size: 9 + Math.random() * 9,
         glyph,
         glyphSize: 26 + Math.random() * 18,
@@ -121,8 +116,8 @@ function ParticleComponent({ type, speedMultiplier, onDone }: Props) {
     transform: [{ translateX }, { translateY }, { rotate }, { scale }],
   };
 
-  // Shape-based explosions: solid paper pieces (confetti) and rainbow stripes.
-  if (type === 'confetti' || type === 'rainbow') {
+  // Confetti is drawn as solid paper pieces; everything else here is a glyph.
+  if (type === 'confetti') {
     return (
       <Animated.View style={[styles.box, animatedStyle]}>
         <Animated.View
