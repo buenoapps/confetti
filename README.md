@@ -17,7 +17,8 @@ Built with [Expo](https://expo.dev) (SDK 56) and React Native.
     - 🐠 **Ocean** – blue water with bubbles drifting up.
     - ☀️ **Blue Sky** – a bright, clear blue sky.
     - ☁️ **Clouds** – blue sky with white clouds drifting across.
-    - 🌴 **Jungle** – lush green gradient.
+    - 🌴 **Jungle** – a dark, shadowy treeline with a hidden creature whose
+      glowing eyes blink in the leaves.
     - ⛄ **Winter** – icy landscape with snow gently falling.
   - **Explosion**
     - 🎉 **Confetti** – colorful paper pieces.
@@ -71,6 +72,7 @@ src/components/
   Bubbles.tsx                   Rising bubbles (Ocean)
   Clouds.tsx                    Drifting clouds (Clouds)
   Snow.tsx                      Falling snowflakes (Winter)
+  Jungle.tsx                    Dark treeline + blinking creature eyes (Jungle)
   ExplosionLayer.tsx            Touch surface; spawns/cleans up explosions
   Particle.tsx                  One flying piece (confetti / emoji / letter / star / fire / berry)
   Firework.tsx                  One firework spark (radial dot burst)

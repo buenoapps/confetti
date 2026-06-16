@@ -6,11 +6,13 @@ import { Stars } from './Stars';
 import { Bubbles } from './Bubbles';
 import { Clouds } from './Clouds';
 import { Snow } from './Snow';
+import { Jungle } from './Jungle';
 
 /**
  * Renders the selected background: a full-screen gradient plus optional
  * animated decorations (stars for space, bubbles for the ocean, drifting
- * clouds for the sky and falling snow for winter).
+ * clouds for the sky, falling snow for winter and a shadowy treeline with a
+ * lurking creature for the jungle).
  */
 
 type Props = {
@@ -32,6 +34,7 @@ export function Background({ background }: Props) {
       {background === 'underwater' && <Bubbles />}
       {background === 'clouds' && <Clouds />}
       {background === 'winter' && <Snow />}
+      {background === 'jungle' && <Jungle />}
     </LinearGradient>
   );
 }
