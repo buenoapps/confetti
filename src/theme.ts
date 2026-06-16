@@ -23,7 +23,6 @@ export type ExplosionId =
   | 'firework'
   | 'water'
   | 'smoke'
-  | 'smokefire'
   | 'lightning'
   | 'rainbow'
   | 'snowflakes'
@@ -116,7 +115,6 @@ export const EXPLOSIONS: ExplosionOption[] = [
   { id: 'firework', label: 'Firework', icon: '🎆' },
   { id: 'water', label: 'Water', icon: '💧' },
   { id: 'smoke', label: 'Smoke', icon: '💨' },
-  { id: 'smokefire', label: 'Fire & Smoke', icon: '🌋' },
   { id: 'lightning', label: 'Lightning', icon: '⚡' },
   { id: 'rainbow', label: 'Rainbow', icon: '🌈' },
   { id: 'snowflakes', label: 'Snow', icon: '❄️' },
@@ -167,24 +165,18 @@ export const EXPLOSION_EMOJIS = [
 export const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
 /**
- * Emoji sets for the emoji-based explosions. Each tap picks randomly from the
- * matching list. Explosions not listed here are drawn as shapes (see
- * `Particle.tsx`): `confetti` uses CONFETTI_COLORS, `rainbow` uses
- * RAINBOW_COLORS, and `alphabet`/`emojis` have their own special handling.
+ * Emoji sets for the simple emoji-based explosions that reuse the confetti
+ * motion (see `Particle.tsx`). The richer effects — firework, water, smoke,
+ * lightning, rainbow and snow — have their own dedicated components and are not
+ * listed here.
  */
 export const EXPLOSION_GLYPHS: Partial<Record<ExplosionId, string[]>> = {
   stars: ['⭐', '🌟', '✨', '💫'],
   fire: ['🔥'],
-  firework: ['🎆', '🎇', '✨'],
-  water: ['💧', '💦'],
-  smoke: ['💨'],
-  smokefire: ['🔥', '💨', '🔥'],
-  lightning: ['⚡', '🌩️'],
-  snowflakes: ['❄️', '🌨️', '❄'],
   strawberries: ['🍓'],
 };
 
-/** Rainbow stripe colors, in order, for the "Rainbow" explosion. */
+/** Rainbow colors, from the outer ring inward, for the "Rainbow" effect. */
 export const RAINBOW_COLORS = [
   '#FF3B3B',
   '#FF8A3D',
